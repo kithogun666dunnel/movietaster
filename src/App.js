@@ -55,7 +55,11 @@ export default function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar movies={movies}>
+        <Logo />
+        <Search />
+        <Result movies={movies} />
+      </Navbar>
       <Main movies={movies} />
     </>
   );
@@ -83,22 +87,16 @@ function Logo() {
   );
 }
 
-function Result() {
+function Result({ movies }) {
   return (
     <p className="num-results">
-      Found <strong>X</strong> results
+      Found <strong>{movies.length}</strong> results
     </p>
   );
 }
 
-function Navbar() {
-  return (
-    <nav className="nav-bar">
-      <Logo />
-      <Search />
-      <Result />
-    </nav>
-  );
+function Navbar({ children }) {
+  return <nav className="nav-bar">{children}</nav>;
 }
 
 function Main({ movies }) {
